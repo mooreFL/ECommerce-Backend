@@ -71,7 +71,7 @@ router.delete('/:id', async (req, res) => {
       }
     });
     if (!tagData) {
-      res.status(4040).json({ message: "No card with that id"});
+      res.status(404).json({ message: "No tag with that ID!"});
       return;
     }
 
