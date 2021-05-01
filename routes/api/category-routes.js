@@ -7,10 +7,10 @@ router.get('/', async (req, res) => {
   // find all categories
   // be sure to include its associated Products
   try {
-    const tagData = await Category.findAll({
+    const categoryData = await Category.findAll({
       include: [{ model: Product }],
     });
-    res.status(200).json(tagData);
+    res.status(200).json(categoryData);
   } catch (err) {
     console.log(err)
     res.status(500).json(err)
@@ -21,10 +21,10 @@ router.get('/:id', async (req, res) => {
   // find one category by its `id` value
   // be sure to include its associated Products
   try {
-    const tagData = await Tag.findByPk(req.params.id, {
+    const categoryData = await Category.findByPk(req.params.id, {
       include: [{ model: Product }],
     });
-    res.status(200).json(tagData);
+    res.status(200).json(categoryData);
   } catch (err) {
     console.log(err) 
     res.status(500).json(err);
@@ -34,8 +34,8 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
   // create a new category
   try {
-    const tagData = await Tag.create(req.body);
-    res.status(200).json(tagData);
+    const categoryData = await Category.create(req.body);
+    res.status(200).json(categoryData);
   } catch (err) {
     console.log(err)
     res.status(400).json(err);
@@ -45,16 +45,16 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
-    const tagData = await Tag.update(
+    const categoryData = await Category.update(
       {
-        tag_name: req.body.tag_name,
+        category_name: req.body.category_name,
       },
       {
         where: {
           id: req.params.id
         }
       })
-      res.status(200).json(tagData)
+      res.status(200).json(categoryData)
     } catch (err) {
       console.log(err)
       res.status(400).json(err);
@@ -64,16 +64,16 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try {
-    const tagData = await Tag.destroy({
+    const categoryData = await Category.destroy({
       where: {
         id: req.params.id,
       }
     });
-    if (!tagData) {
-      res.status(404).json({ message: "No tag with that ID!"});
+    if (!categoryData) {
+      res.status(404).json({ message: "No category with that ID!"});
       return;
     }
-    res.status(200).json(tagdata);
+    res.status(200).json(categoryData);
   } catch (err) {
     res.status.json(err);
   }
